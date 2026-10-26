@@ -40,24 +40,27 @@
 
         <Button x:Name="ObliczButton" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Oblicz wartość" Click="Oblicz"/>
 
-        <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" Margin="0,12,0,12" />
+        <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" />
 
-        <Button x:Name="DodajProduktButton" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Dodaj produkt" Margin="0,0,0,10" Click="DodajProdukt" />
+        <Button x:Name="DodajProduktButton" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Dodaj produkt" Click="DodajProdukt" />
 
-        <ListBox x:Name="ListaProduktow" ItemsSource="{Binding produkty}" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,12,0,12">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="0,2">
-                        <TextBlock Text="{Binding Nazwa}" FontWeight="Bold" />
-                        <TextBlock>
-                            <Run Text="{Binding Kategoria}" />
-                            <Run Text=" - " />
-                            <Run Text="{Binding Cena, StringFormat={}{0:F2} zł}" />
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <DataGrid x:Name="ListaProduktow"
+                  Grid.Row="8"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Margin="0"
+                  ItemsSource="{Binding Produkty}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" Width="*" />
+                <DataGridTextColumn Header="Kategoria" Binding="{Binding Kategoria}" Width="*" />
+                <DataGridTextColumn Header="Cena" Binding="{Binding Cena, StringFormat={}{0:F2} zł}" Width="Auto" />
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Ilosc}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Button x:Name="UsunProduktButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Usuń produkt" Click="UsunProdukt" />
     </Grid>

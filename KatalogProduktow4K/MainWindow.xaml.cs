@@ -14,15 +14,17 @@ namespace KatalogProduktow4K
 {
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Produkt> produkty { get; set; } = new ObservableCollection<Produkt>();
+        public ObservableCollection<Produkt> Produkty { get; } = new();
         public MainWindow()
         {
             InitializeComponent();
             KategorieComboBox.ItemsSource = new string[] { "Elektronika", "Odzież", "Książki", "Meble" };
             KategorieComboBox.SelectedIndex = 0;
 
-            produkty.Add(new Produkt { Nazwa = "Laptop", Cena = 3500, Ilosc = 5, Kategoria = "Elektronika" });
-            produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
+            Produkty.Add(new Produkt { Nazwa = "Laptop", Cena = 3500, Ilosc = 5, Kategoria = "Elektronika" });
+            Produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
+
+            // Binding DataGrid.ItemsSource -> Produkty.
             DataContext = this;
         }
 
@@ -61,14 +63,14 @@ namespace KatalogProduktow4K
             }
 
             string kategoria = KategorieComboBox.SelectedItem as string ?? "brak kategorii";
-            produkty.Add(new Produkt { Nazwa = NazwaTextBox.Text, Cena = cena, Ilosc = ilosc, Kategoria = kategoria });
+            Produkty.Add(new Produkt { Nazwa = NazwaTextBox.Text, Cena = cena, Ilosc = ilosc, Kategoria = kategoria });
         }
 
         private void UsunProdukt(object sender, RoutedEventArgs e)
         {
             if (ListaProduktow.SelectedItem is Produkt wybranyProdukt)
             {
-                produkty.Remove(wybranyProdukt);
+                Produkty.Remove(wybranyProdukt);
             }
             else
             {
